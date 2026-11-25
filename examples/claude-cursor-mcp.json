@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "novacopilot-open": {
+      "url": "https://legal.exploreworldai.com/api/public/mcp-open"
+    }
+  }
+}
