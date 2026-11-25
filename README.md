@@ -29,6 +29,17 @@ MCP clients (Claude, Cursor): copy `examples/claude-cursor-mcp.json`.
 
 Parameters: `topic` (gdpr, ai-act, dora, nis2, mica), `country` (eu, se, de, fr, it, es, uk), `sector` (any, banking, insurance, health), `employees`, `revenue`, `type`, `lang` (sv, en, de, fr, it, es, zh), `size` (brief, standard, deep).
 
+## Worked example: Swedish payments and credit firm, 120 employees
+
+Question: "We are a payments and credit firm in Sweden with 120 employees. Which requirements and penalty exposure apply under DORA and NIS2?" Values are taken from live answers.
+
+| Step | Request | Outcome |
+|---|---|---|
+| 1. Query | `topic=dora` and `topic=nis2`, `sector=banking&country=se&employees=50-249` | Two standard requests, no key |
+| 2. Source-bound answer (standard, free) | | DORA applies (Art. 2(1)); Finansinspektionen; penalties under DORA Art. 50. NIS2 likely applies (Annex I); DORA takes precedence where its requirements are equivalent; fines under NIS2 Art. 34(4) and 34(5). Each answer carries `core_sha256`. |
+| 3. Deep analysis (USD 0.05) | `size=deep` | Relations from risk to consequence to action and the decision path |
+| 4. Monitoring (USD 0.02) | `/consequence/changes?watch=dora:se` | 304 at no charge while unchanged; delta with new cursor on change |
+
 ## Notice
 
 Informational regulatory data only, not legal advice. Redistribution permitted provided Source: NovaCopilot and core_sha256 remain intact. Self-service keys capped at 75 unique combinations per 24h; enterprise SLA via stig@valkiv.com.
